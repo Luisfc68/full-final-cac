@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+body{
+    font-family:'Righteous', cursive;
+    padding-top: 75px;
+    background-color: #FEF6FF;
+}
+
+/*--- Header ---*/
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+li{
+    cursor: pointer;
+}
+
+a:link{
+    text-decoration: none !important;
+}
+
+.subdropdown{
+    margin-left: 150px;
+    margin-top: -50px;
+}
+@media (max-width: 370px) {
+    .subdropdown{
+        margin-left: 90px;
+    }
+}
+
+.navbar{
+    background-color: #3500B3;
+    background-image: linear-gradient(to right, #3500B3 , #9C89B3);
+    box-shadow: 0px 2px 7px #1F1926;
+}
+
+.dropdown-menu{
+    box-shadow: 0px 3px 3px #1F1926;
+}
+
+/*--- Banner ---*/
+.imagen-principal{
+    width: 100%;
+}
+
+hr {
+    padding: 0px;
+    margin: 0px auto;
+    border-radius: 2px;
+    background-color: #9C89B3;
+    border: .2vw solid #9C89B3;
+}
+
+/*--- Texto ---*/
+main p{
+    font-size: 19px;
+}
+
+main h2{
+    padding-bottom: 15px;
+    border-bottom: 2px solid #1F1926;
+}
+
+@media (max-width: 544px) {
+    .info-title{
+        font-size: 2rem;
+    }   
+    .info{
+        font-size: .9rem;
+        padding: .2rem !important;
+    }
+}
+
+/*--- Footer ---*/
+
+footer{
+    background-color: #1F1926;
+    color: #FEF6FF;
+}
+
+footer li{
+    cursor: default;
+}
