@@ -8,6 +8,7 @@ package persistencia;
 import excepciones.PersistenciaException;
 import java.util.List;
 import model.Pedido;
+import model.Usuario;
 
 /**
  *
@@ -15,7 +16,7 @@ import model.Pedido;
  */
 public interface PedidoDAO {
     Pedido getById(int id) throws PersistenciaException;
-    List<Pedido> getByUser(int userId) throws PersistenciaException;
+    List<Pedido> getByUser(Usuario u) throws PersistenciaException;
     Pedido delete(int id) throws PersistenciaException;
     void update(Pedido p) throws PersistenciaException;
     void insert(Pedido p) throws PersistenciaException;

@@ -100,12 +100,12 @@ public class UsuarioDaoImp implements UsuarioDAO{
 
     @Override
     public Usuario delete(int id)  throws PersistenciaException{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void update(Usuario u)  throws PersistenciaException{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     
 }
