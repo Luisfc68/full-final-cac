@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Propios -->
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/validation.js"></script>
+    <script src="js/validation.js" type="text/javascript"></script>
 </head>
 <body>
     <main id="formulario-pedido" class="mx-auto rounded p-3">
@@ -64,9 +65,9 @@
                     <label for="localidad">Localidad</label>
                     <select class="custom-select" id="localidad" required>
                         <option value="" selected>Selecciona...</option>
-                        <option value="Palermo">Palermo</option>
-                        <option value="Belgrano">Belgrano</option>
-                        <option value="Nuñez">Núñez</option>
+                        <option value="palermo">Palermo</option>
+                        <option value="belgrano">Belgrano</option>
+                        <option value="nunez">Núñez</option>
                     </select>
                 </div>
                 <div class="col-sm-4">

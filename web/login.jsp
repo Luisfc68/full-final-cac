@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Propios -->
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/validation.js"></script>
+    <script src="js/validation.js" type="text/javascript"></script>
 </head>
 <body class="text-center">
     <main id="login" class="mx-auto rounded px-5 pt-5 pb-0">
@@ -19,7 +20,15 @@
         <h2 class="pb-4">
             Ingreso al sistema
         </h2>
-        <form action="./pedido.html" method="POST" class="needs-validation" novalidate>
+        
+        <% 
+            Boolean error = (Boolean)session.getAttribute("errorClave");
+            if( error!= null && error ){ 
+        %>
+            <p class="text-danger border border-danger rounded" > Usuario o contraseña incorrectos. </p>
+        <% } %>
+        
+        <form action="./LoginServlet" method="POST" class="needs-validation" novalidate>
             <div class="form-group text-left">
                 <label for="nombre-usuario" class="font-weight-bold">
                     Nombre:
