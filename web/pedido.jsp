@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Usuario"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,6 +16,12 @@
     <script src="js/validation.js" type="text/javascript"></script>
 </head>
 <body>
+    
+    <% 
+        if(session.getAttribute("usuario") == null)
+            request.getRequestDispatcher("./login.jsp").forward(request, response);
+    %>
+    
     <main id="formulario-pedido" class="mx-auto rounded p-3">
         <div class="text-center p-1">
             <img src="img/logo.jpg" alt="Logo">
@@ -29,7 +36,7 @@
         <h2 class="text-center mt-1 mb-3">
             Tu pedido
         </h2>
-        <form class="needs-validation" action="" method="POST" novalidate>
+        <form class="needs-validation" action="./PedidoServlet" method="POST" novalidate>
             <div class="form-row mb-3">
                 <div class="col-sm-6">
                     <label for="nombre">Nombre </label>
@@ -47,7 +54,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
                     </div>
-                    <input class="form-control" type="text" name="username" id="username" required>
+                    <input class="form-control" type="text" name="username" id="username" required value="<%=((Usuario)session.getAttribute("usuario")).getNombreUsuario()%>" readonly>
                 </div>
             </div>
 
@@ -63,7 +70,7 @@
             <div class="form-row">
                 <div class="col-sm-4">
                     <label for="localidad">Localidad</label>
-                    <select class="custom-select" id="localidad" required>
+                    <select class="custom-select" id="localidad" name="localidad" required>
                         <option value="" selected>Selecciona...</option>
                         <option value="palermo">Palermo</option>
                         <option value="belgrano">Belgrano</option>
@@ -72,7 +79,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="provincia">Provincia</label>
-                    <select class="custom-select" id="provincia" required>
+                    <select class="custom-select" id="provincia" name="provincia" required>
                         <option value="" selected>Selecciona...</option>
                         <option value="buenos-aires">Buenos Aires</option>
                         <option value="cordoba">Córdoba</option>

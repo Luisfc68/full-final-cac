@@ -12,8 +12,9 @@ package model;
 public class Pedido {
     
     private boolean pagoTarjeta; //True tarjeta false mercado-pago
-    private String nombre,apellido,correo,direccion,localidad,provincia,titularTarjeta;
-    private int id,codPostal,numeroTarjeta,codSeguridad;
+    private String nombre,apellido,correo,direccion,localidad,provincia,titularTarjeta,fechaVencimiento;
+    private int id,codPostal,codSeguridad;
+    private long numeroTarjeta;
     private Usuario usuario;
 
     public boolean isPagoTarjeta() {
@@ -56,7 +57,7 @@ public class Pedido {
         return codPostal;
     }
 
-    public int getNumeroTarjeta() {
+    public long getNumeroTarjeta() {
         return numeroTarjeta;
     }
 
@@ -66,6 +67,14 @@ public class Pedido {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+    
+    public String getFechaVencimiento(){
+        return fechaVencimiento;
+    }
+    
+    public void setFechaVencimiento(String fechaVencimiento){
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public void setPagoTarjeta(boolean pagoTarjeta) {
@@ -108,7 +117,7 @@ public class Pedido {
         this.codPostal = codPostal;
     }
 
-    public void setNumeroTarjeta(int numeroTarjeta) {
+    public void setNumeroTarjeta(long numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
     }
 

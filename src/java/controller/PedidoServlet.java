@@ -13,23 +13,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Pedido;
 import model.Usuario;
-import persistencia.UsuarioDAO;
-import persistencia.UsuarioDaoImp;
+import persistencia.PedidoDAO;
+import persistencia.PedidoDaoImp;
 
 /**
  *
  * @author Luis
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "PedidoServlet", urlPatterns = {"/PedidoServlet"})
+public class PedidoServlet extends HttpServlet {
 
-    private final UsuarioDAO ud;
+    private final PedidoDAO pd;    
     
-    public LoginServlet() {
-       this.ud = new UsuarioDaoImp();
+    public PedidoServlet() {
+        this.pd = new PedidoDaoImp();
     }
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,37 +44,39 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         
         try{
             
-            String nombreUsuario = request.getParameter("nombre-usuario");
-            String clave = request.getParameter("clave");
-            if(nombreUsuario != null && clave != null){
-                
-                Usuario usuario = ud.getByName(nombreUsuario);
-                HttpSession session = request.getSession();
-                Boolean errorClave = false;
-                
-                if(usuario != null && usuario.getClave().equals(clave)){
-                    
-                    session.setAttribute("usuario", usuario);
-                    response.sendRedirect("pedido.jsp");
-                    
-                }else{
-                    
-                    errorClave = true;
-                    response.sendRedirect("login.jsp");
-                    
-                }
-                
-                session.setAttribute("errorClave",errorClave);
-            }
+            Pedido p = new Pedido();
+            p.setUsuario((Usuario)session.getAttribute("usuario"));
+            p.setNombre(request.getParameter("nombre"));
+            p.setApellido(request.getParameter("apellido"));
+            p.setCorreo(request.getParameter("correo"));
+            p.setDireccion(request.getParameter("direccion"));
+            p.setLocalidad(request.getParameter("localidad"));
+            p.setProvincia(request.getParameter("provincia"));
+            p.setTitularTarjeta(request.getParameter("nombre-titular"));
+            p.setFechaVencimiento(request.getParameter("vencimiento"));
+            p.setCodPostal(Integer.parseInt(request.getParameter("cod-postal")));
+            p.setNumeroTarjeta(Long.parseLong(request.getParameter("numero-tarjeta")));
+            p.setCodSeguridad(Integer.parseInt(request.getParameter("cod-tarjeta")));
+            if(request.getParameter("formapago").equals("credito"))
+                p.setPagoTarjeta(true);
+            else
+                p.setPagoTarjeta(false);
             
+            pd.insert(p);
+            session.setAttribute("exitoPedido", true);
             
-            
-        }catch(PersistenciaException e){
+        }catch(PersistenciaException | NumberFormatException e){ 
             System.err.println(e.getMessage());
+            session.setAttribute("exitoPedido", false);
+            
+        }finally{
+            request.getRequestDispatcher("./exito.jsp").forward(request, response);
         }
+        
         
     }
 
@@ -89,7 +92,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        processRequest(request, response);
     }
 
     /**

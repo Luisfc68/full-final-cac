@@ -30,7 +30,7 @@ public class PedidoDaoImp implements PedidoDAO{
             conn = ConectorBD.getInstance().conectar();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("select id_pedido,nombre,apellido,correo,direccion,localidad,provincia,"
-                    + "cod-postal,forma-pago,nombre-titular,numero-tarjeta,codigo-seguridad"
+                    + "cod_postal,forma_pago,nombre_titular,numero_tarjeta,codigo_seguridad"
                     + " from pedido where id_pedido = "+id);
             if(!rs.next())
                 return null;
@@ -46,7 +46,7 @@ public class PedidoDaoImp implements PedidoDAO{
             p.setCodPostal(rs.getInt(8));
             p.setPagoTarjeta(rs.getBoolean(9));
             p.setTitularTarjeta(rs.getString(10));
-            p.setNumeroTarjeta(rs.getInt(11));
+            p.setNumeroTarjeta(rs.getLong(11));
             p.setCodSeguridad(rs.getInt(12));
             
             return p;
@@ -74,7 +74,7 @@ public class PedidoDaoImp implements PedidoDAO{
             conn = ConectorBD.getInstance().conectar();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("select id_pedido,nombre,apellido,correo,direccion,localidad,provincia,"
-                    + "cod-postal,forma-pago,nombre-titular,numero-tarjeta,codigo-seguridad"
+                    + "cod_postal,forma_pago,nombre_titular,numero_tarjeta,codigo_seguridad"
                     + " from pedido where id_usuario = "+u.getId());
             
             while(rs.next()){
@@ -90,7 +90,7 @@ public class PedidoDaoImp implements PedidoDAO{
                 p.setCodPostal(rs.getInt(8));
                 p.setPagoTarjeta(rs.getBoolean(9));
                 p.setTitularTarjeta(rs.getString(10));
-                p.setNumeroTarjeta(rs.getInt(11));
+                p.setNumeroTarjeta(rs.getLong(11));
                 p.setCodSeguridad(rs.getInt(12));
 
                 pedidos.add(p);
@@ -118,8 +118,8 @@ public class PedidoDaoImp implements PedidoDAO{
         try{
             conn = ConectorBD.getInstance().conectar();
             PreparedStatement stm = conn.prepareStatement("insert into pedido(id_usuario,nombre,apellido,correo,"
-                    + "direccion,localidad,provincia,cod-postal,forma-pago,nombre-titular,numero-tarjeta,"
-                    + "codigo-seguridad) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "direccion,localidad,provincia,cod_postal,forma_pago,nombre_titular,numero_tarjeta,"
+                    + "codigo_seguridad) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             stm.setInt(1,p.getUsuario().getId());
             stm.setString(2, p.getNombre());
             stm.setString(3, p.getApellido());
@@ -130,11 +130,11 @@ public class PedidoDaoImp implements PedidoDAO{
             stm.setInt(8,p.getCodPostal());
             stm.setBoolean(9, p.isPagoTarjeta());
             stm.setString(10, p.getTitularTarjeta());
-            stm.setInt(11,p.getNumeroTarjeta());
+            stm.setLong(11,p.getNumeroTarjeta());
             stm.setInt(12, p.getCodSeguridad());
             
             stm.execute();
-            
+                
         }catch(SQLException e){
             throw new PersistenciaException("Error insertando pedido");
         }finally{
